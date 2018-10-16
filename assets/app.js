@@ -13,18 +13,10 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// var userTrainName = $("#trainname-input")
-//   .val()
-//   .trim();
-// var userDestination = $("#destination-input")
-//   .val()
-//   .trim();
-// var userFirstTrain = $("#firsttime-input")
-//   .val()
-//   .trim();
-// var userFrequency = $("#frequency-input")
-//   .val()
-//   .trim();
+var arrTrainName = [];
+var arrDestination = [];
+var arrFirstTrain = [];
+var arrFrequency = [];
 
 // Take user input values and update Firebase
 $("#submit").on("click", function() {
@@ -41,20 +33,52 @@ $("#submit").on("click", function() {
   var userFrequency = $("#frequency-input")
     .val()
     .trim();
-  console.log(userTrainName, userDestination, userFirstTrain, userFrequency);
+
+  arrTrainName.push(userTrainName);
+  arrDestination.push(userDestination);
+  arrFirstTrain.push(userFirstTrain);
+  arrFrequency.push(userFrequency);
 
   database.ref().set({
-    savedTrainName: userTrainName,
-    savedDestination: userDestination,
-    savedFirstTrain: userFirstTrain,
-    savedFrequency: userFrequency
+    savedTrainNames: arrTrainName,
+    savedDestinations: arrDestination,
+    savedFirstTrains: arrFirstTrain,
+    savedFrequencies: arrFrequency
   });
 
-  console.log(userTrainName, userDestination, userFirstTrain, userFrequency);
+  console.log(arrTrainName, arrDestination, arrFirstTrain, arrFrequency);
 });
 
 // When value in database changes, update page display
 
 database.ref().on("value", function(snapshot) {
-  console.log(snapshot.val());
+  console.log(snapshot.val().savedTrainNames);
+  // Empty listed train info
+  $("#trainname-display").empty();
+  $("#destination-display").empty();
+  $("#frequency-display").empty();
+  // maybe not include this since it will eventually be updated every min?
+  $("#nextarrival-display").empty();
+  $("#minutes-display").empty();
+
+  // get info from database
+  var updatedTrainNames = snapshot.val().savedTrainNames;
+  var updatedDestinations = snapshot.val().savedDestinations;
+  var updatedFrequencies = snapshot.val().savedFrequencies;
+  // Include displays with math
+  // CODE GOES HERE
+
+
+  // Re-display by appending with updated array
+  for (var i = 0; i < updatedTrainNames.length; i++){
+    //create divs with that display train info (extra, add data-value of updatedTrainNames index # here so you can delete individual rows)
+    // append divs to display
+    $("#trainname-display").append();
+    $("#destination-display").append();
+    $("#frequency-display").append();
+  }
+ 
+  // maybe not include this since it will eventually be updated every min?
+  $("#nextarrival-display").empty();
+  $("#minutes-display").empty();
 });
