@@ -17,6 +17,8 @@ var arrTrainName = [];
 var arrDestination = [];
 var arrFirstTrain = [];
 var arrFrequency = [];
+var arrNextArrival = [];
+var arrMinutesAway = [];
 
 // Take user input values and update Firebase
 $("#submit").on("click", function() {
@@ -34,19 +36,41 @@ $("#submit").on("click", function() {
     .val()
     .trim();
 
+
+    // moment math
+  var firstTimeConverted = moment(userFirstTrain, "HH:mm").subtract(1, "years");
+  console.log(firstTimeConverted);
+
+ // get minutes away
+  var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+  var remainder = diffTime % userFrequency;
+  var minutesAway = userFrequency - remainder;
+  console.log("Minutes Away: " + minutesAway);
+// get next train time
+  var nextTrain = moment().add(minutesAway, "minutes");
+  var nextTrainTime = moment(nextTrain).format("HH:mm");
+  console.log(nextTrain);
+  console.log(nextTrainTime);
+
+
   arrTrainName.push(userTrainName);
   arrDestination.push(userDestination);
   arrFirstTrain.push(userFirstTrain);
   arrFrequency.push(userFrequency);
+  arrNextArrival.push(nextTrainTime);
+  arrMinutesAway.push(minutesAway);
 
+  // set keys and values
   database.ref().set({
     savedTrainNames: arrTrainName,
     savedDestinations: arrDestination,
     savedFirstTrains: arrFirstTrain,
-    savedFrequencies: arrFrequency
+    savedFrequencies: arrFrequency,
+    savedNextArrivals: arrNextArrival,
+    savedMinutesAway: arrMinutesAway
   });
 
-  console.log(arrTrainName, arrDestination, arrFirstTrain, arrFrequency);
+  console.log(arrTrainName, arrDestination, arrFirstTrain, arrFrequency, arrNextArrival, arrMinutesAway);
 });
 
 // When value in database changes, update page display
@@ -67,6 +91,9 @@ database.ref().on("value", function(snapshot) {
   var updatedFrequencies = snapshot.val().savedFrequencies;
   // Include displays with math
   // CODE GOES HERE
+  // var updatedNextArrivals = 
+  // var updatedMinutes = 
+
 
 
   // Re-display by appending with updated array
@@ -87,3 +114,38 @@ database.ref().on("value", function(snapshot) {
   $("#nextarrival-display").empty();
   $("#minutes-display").empty();
 });
+
+// Calculate next arrival and minutes away
+function calculation () {
+   // Assumptions
+   var tFrequency = 3;
+
+   // Time is 3:30 AM
+   var firstTime = "03:30";
+
+   // First Time (pushed back 1 year to make sure it comes before current time)
+   var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
+   console.log(firstTimeConverted);
+
+   // Current Time
+   var currentTime = moment();
+   console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+   // Difference between the times
+   var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+   console.log("DIFFERENCE IN TIME: " + diffTime);
+
+   // Time apart (remainder)
+   var tRemainder = diffTime % tFrequency;
+   console.log(tRemainder);
+
+   // Minute Until Train
+   var tMinutesTillTrain = tFrequency - tRemainder;
+   console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+   // Next Train
+   var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+   console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+}
+
+calculation();
