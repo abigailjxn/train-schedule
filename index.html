@@ -24,11 +24,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="column" id="trainname">Train Name</div>
-        <div class="column" id="destination">Destination</div>
-        <div class="column" id="frequency">Frequency (min)</div>
-        <div class="column" id="nextarrival">Next Arrival</div>
-        <div class="column" id="minutesaway">Minutes Away</div>
+        <div class="column" id="trainname-display">Train Name</div>
+        <div class="column" id="destination-display">Destination</div>
+        <div class="column" id="frequency-display">Frequency (min)</div>
+        <div class="column" id="nextarrival-display">Next Arrival</div>
+        <div class="column" id="minutesaway-display">Minutes Away</div>
     </div>
 </div>
 
@@ -37,13 +37,13 @@
         <div class="column">
             <div class="form">
                 <label>Train Name</label>
-                <input type="text" class="trainname"><br>
+                <input type="text" id="trainname-input"><br>
                 <label>Destination</label>
-                <input type="text" class="destination"><br>
+                <input type="text" id="destination-input"><br>
                 <label>First Train Time (HH:mm - military time) </label>
-                <input type="text" class="firsttime"><br>
+                <input type="text" id="firsttime-input"><br>
                 <label>Frequency (min)</label>
-                <input type="text" class="frequency"><br>
+                <input type="text" id="frequency-input"><br>
                 <button id="submit">Submit</button>
             </div>
         </div>

@@ -8,3 +8,20 @@
     messagingSenderId: "364153720440"
   };
   firebase.initializeApp(config);
+
+  // Connect to database
+
+  var database = firebase.database();
+
+  // Take user input values and update Firebase
+  $("#submit").click(function (){
+    var userTrainName = $("")
+  })
+
+  // When value in database changes, update page
+
+  database.ref().on("value", function(snapshot) {
+    console.log(snapshot.val());
+  });
+
+
