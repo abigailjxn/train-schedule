@@ -72,10 +72,15 @@ database.ref().on("value", function(snapshot) {
   // Re-display by appending with updated array
   for (var i = 0; i < updatedTrainNames.length; i++){
     //create divs with that display train info (extra, add data-value of updatedTrainNames index # here so you can delete individual rows)
+    var displayTrainNames = $("<p>").text(updatedTrainNames[i]);
+    var displayDestinations = $("<p>").text(updatedDestinations[i]);
+    var displayFrequencies = $("<p>").text(updatedFrequencies[i]);
+   
+   
     // append divs to display
-    $("#trainname-display").append();
-    $("#destination-display").append();
-    $("#frequency-display").append();
+    $("#trainname-display").append(displayTrainNames);
+    $("#destination-display").append(displayDestinations);
+    $("#frequency-display").append(displayFrequencies);
   }
  
   // maybe not include this since it will eventually be updated every min?
