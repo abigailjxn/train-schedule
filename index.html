@@ -11,6 +11,8 @@
         crossorigin="anonymous"></script>
     <!-- Link to Firebase Database  -->
     <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+    <!-- Added Moment JS -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <!-- Link to CSS  -->
     <link rel="stylesheet" href="assets/reset.css">
     <link rel="stylesheet" href="assets/style.css">
@@ -18,7 +20,35 @@
 </head>
 
 <body>
+<header>Train Time</header>
 
+<div class="container">
+    <div class="row">
+        <div class="column" id="trainname">Train Name</div>
+        <div class="column" id="destination">Destination</div>
+        <div class="column" id="frequency">Frequency (min)</div>
+        <div class="column" id="nextarrival">Next Arrival</div>
+        <div class="column" id="minutesaway">Minutes Away</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <div class="form">
+                <label>Train Name</label>
+                <input type="text" class="trainname"><br>
+                <label>Destination</label>
+                <input type="text" class="destination"><br>
+                <label>First Train Time (HH:mm - military time) </label>
+                <input type="text" class="firsttime"><br>
+                <label>Frequency (min)</label>
+                <input type="text" class="frequency"><br>
+                <button id="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script type="javascript" src="assets/app.js"></script>
 </body>
