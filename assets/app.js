@@ -51,6 +51,7 @@ $("#submit").on("click", function() {
   console.log(nextTrain);
   console.log(nextTrainTime);
 
+  // push to arrays
   arrTrainName.push(userTrainName);
   arrDestination.push(userDestination);
   arrFirstTrain.push(userFirstTrain);
@@ -65,7 +66,7 @@ $("#submit").on("click", function() {
     savedFirstTrains: arrFirstTrain,
     savedFrequencies: arrFrequency,
     savedNextArrivals: arrNextArrival,
-    savedMinutesAway: arrMinutesAway
+    savedMinutesAway: arrMinutesAway,
   });
 
 });
@@ -80,7 +81,7 @@ database.ref().on("value", function(snapshot) {
   $("#frequency-display").empty();
   // maybe not include this since it will eventually be updated every min?
   $("#nextarrival-display").empty();
-  $("#minutes-display").empty();
+  $("#minutesaway-display").empty();
 
   // get info from database
   var updatedTrainNames = snapshot.val().savedTrainNames;
@@ -115,7 +116,7 @@ function reset() {
     savedFirstTrains: "",
     savedFrequencies: "",
     savedNextArrivals: null,
-    savedMinutesAway: null
+    savedMinutesAway: null,
   });
 };
 
