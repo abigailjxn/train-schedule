@@ -13,57 +13,81 @@
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <!-- Link to CSS  -->
     <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.css">
     <link rel="stylesheet" href="assets/style.css">
 
 </head>
 
 <body>
     <header>
-        <h1>Locomotion, Y'all</h1>
+        <h1 class="ui header">Locomotion, Y'all</h1>
     </header>
 
+    <div class="ui hidden divider"></div>
+
     <div class="container">
-        <div class="row">
-            <div class="column">
-                <h3>Train Name</h3>
-                <div id="trainname-display"></div>
-            </div>
-            <div class="column">
-                <h3>Destination</h3>
-                <div id="destination-display"></div>
-            </div>
-            <div class="column">
-                <h3>Frequency (min)</h3>
-                <div id="frequency-display"></div>
-            </div>
-            <div class="column">
-                <h3>Next Arrival</h3>
-                <div id="nextarrival-display"></div>
-            </div>
-            <div class="column">
-                <h3>Minutes Away</h3>
-                <div id="minutesaway-display"></div>
+        <div class="ui vertically divided grid">
+
+            <div class="row">
+
+                <div class="three wide column">
+                    <h4>Train Name</h4>
+                    <div class="ui divider"></div>
+                    <div id="trainname-display"></div>
+
+                </div>
+                <div class="three wide column">
+                    <h4>Destination</h4>
+                    <div class="ui divider"></div>
+                    <div id="destination-display"></div>
+                </div>
+                <div class="three wide column">
+                    <h4>Frequency (min)</h4>
+                    <div class="ui divider"></div>
+                    <div id="frequency-display"></div>
+                </div>
+                <div class="three wide column">
+                    <h4>Next Arrival</h4>
+                    <div class="ui divider"></div>
+                    <div id="nextarrival-display"></div>
+                </div>
+                <div class="three wide column">
+                    <h4>Minutes Away</h4>
+                    <div class="ui divider"></div>
+                    <div id="minutesaway-display"></div>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="ui hidden divider"></div>
+
     <div class="container">
         <div class="row">
             <div class="column">
-                <div class="form">
-                    <label>Train Name</label>
-                    <input type="text" id="trainname-input"><br>
-                    <label>Destination</label>
-                    <input type="text" id="destination-input"><br>
-                    <label>First Train Time (HH:mm - military time) </label>
-                    <input type="text" id="firsttime-input"><br>
-                    <label>Frequency (min)</label>
-                    <input type="text" id="frequency-input"><br>
-                    <button id="submit">Submit</button>
-                    <button id="reset">Reset</button>
+                <div class="ui form">
+                    <div class="field">
+                        <label>Train Name</label>
+                        <input type="text" id="trainname-input" placeholder="Hogwarts Express">
+                    </div>
+                    <div class="field">
+                        <label>Destination</label>
+                        <input type="text" id="destination-input" placeholder="Hogwarts">
+                    </div>
+                    <div class="field">
+                        <label>First Train Time (HH:mm - military time) </label>
+                        <input type="text" id="firsttime-input" placeholder="09:00">
+                    </div>
+                    <div class="field">
+                        <label>Frequency (min)</label>
+                        <input type="text" id="frequency-input" placeholder="720">
+                    </div>
+                    <button class="ui teal button" id="submit">Submit</button>
+                    <button class="ui button" id="reset">Reset</button>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- Link to JQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
