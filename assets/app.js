@@ -90,9 +90,8 @@ database.ref().on("value", function(snapshot) {
   var updatedDestinations = snapshot.val().savedDestinations;
   var updatedFrequencies = snapshot.val().savedFrequencies;
   // Include displays with math
-  // CODE GOES HERE
-  // var updatedNextArrivals = 
-  // var updatedMinutes = 
+  var updatedNextArrivals = snapshot.val().savedNextArrivals;
+  var updatedMinutes = snapshot.val().savedMinutesAway;
 
 
 
@@ -102,50 +101,17 @@ database.ref().on("value", function(snapshot) {
     var displayTrainNames = $("<p>").text(updatedTrainNames[i]);
     var displayDestinations = $("<p>").text(updatedDestinations[i]);
     var displayFrequencies = $("<p>").text(updatedFrequencies[i]);
+    var displayNextArrivals = $("<p>").text(updatedNextArrivals[i]);
+    var displayMinutes = $("<p>").text(updatedMinutes[i]);
    
    
     // append divs to display
     $("#trainname-display").append(displayTrainNames);
     $("#destination-display").append(displayDestinations);
     $("#frequency-display").append(displayFrequencies);
+    $("#nextarrival-display").append(displayNextArrivals);
+    $("#minutesaway-display").append(displayMinutes);
   }
  
-  // maybe not include this since it will eventually be updated every min?
-  $("#nextarrival-display").empty();
-  $("#minutes-display").empty();
 });
 
-// Calculate next arrival and minutes away
-function calculation () {
-   // Assumptions
-   var tFrequency = 3;
-
-   // Time is 3:30 AM
-   var firstTime = "03:30";
-
-   // First Time (pushed back 1 year to make sure it comes before current time)
-   var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
-   console.log(firstTimeConverted);
-
-   // Current Time
-   var currentTime = moment();
-   console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-
-   // Difference between the times
-   var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-   console.log("DIFFERENCE IN TIME: " + diffTime);
-
-   // Time apart (remainder)
-   var tRemainder = diffTime % tFrequency;
-   console.log(tRemainder);
-
-   // Minute Until Train
-   var tMinutesTillTrain = tFrequency - tRemainder;
-   console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
-
-   // Next Train
-   var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-   console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
-}
-
-calculation();
