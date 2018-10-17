@@ -36,22 +36,20 @@ $("#submit").on("click", function() {
     .val()
     .trim();
 
-
-    // moment math
+  // moment math
   var firstTimeConverted = moment(userFirstTrain, "HH:mm").subtract(1, "years");
   console.log(firstTimeConverted);
 
- // get minutes away
+  // get minutes away
   var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
   var remainder = diffTime % userFrequency;
   var minutesAway = userFrequency - remainder;
   console.log("Minutes Away: " + minutesAway);
-// get next train time
+  // get next train time
   var nextTrain = moment().add(minutesAway, "minutes");
   var nextTrainTime = moment(nextTrain).format("HH:mm");
   console.log(nextTrain);
   console.log(nextTrainTime);
-
 
   arrTrainName.push(userTrainName);
   arrDestination.push(userDestination);
@@ -70,7 +68,6 @@ $("#submit").on("click", function() {
     savedMinutesAway: arrMinutesAway
   });
 
-  console.log(arrTrainName, arrDestination, arrFirstTrain, arrFrequency, arrNextArrival, arrMinutesAway);
 });
 
 // When value in database changes, update page display
@@ -93,18 +90,15 @@ database.ref().on("value", function(snapshot) {
   var updatedNextArrivals = snapshot.val().savedNextArrivals;
   var updatedMinutes = snapshot.val().savedMinutesAway;
 
-
-
   // Re-display by appending with updated array
-  for (var i = 0; i < updatedTrainNames.length; i++){
+  for (var i = 0; i < updatedTrainNames.length; i++) {
     //create divs with that display train info (extra, add data-value of updatedTrainNames index # here so you can delete individual rows)
     var displayTrainNames = $("<p>").text(updatedTrainNames[i]);
     var displayDestinations = $("<p>").text(updatedDestinations[i]);
     var displayFrequencies = $("<p>").text(updatedFrequencies[i]);
     var displayNextArrivals = $("<p>").text(updatedNextArrivals[i]);
     var displayMinutes = $("<p>").text(updatedMinutes[i]);
-   
-   
+
     // append divs to display
     $("#trainname-display").append(displayTrainNames);
     $("#destination-display").append(displayDestinations);
@@ -112,6 +106,19 @@ database.ref().on("value", function(snapshot) {
     $("#nextarrival-display").append(displayNextArrivals);
     $("#minutesaway-display").append(displayMinutes);
   }
- 
 });
 
+function reset() {
+  database.ref().set({
+    savedTrainNames: "",
+    savedDestinations: "",
+    savedFirstTrains: "",
+    savedFrequencies: "",
+    savedNextArrivals: null,
+    savedMinutesAway: null
+  });
+};
+
+$("#reset").click(function(){
+  reset();
+})
